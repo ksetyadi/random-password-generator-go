@@ -2,31 +2,11 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 	"os"
 	"strconv"
-	"time"
+
+	"github.com/ksetyadi/randompass/libs"
 )
-
-const alphanum = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-const specialchars = "!@#$%&"
-
-func generateRandomPassword(length int, option string) string {
-	randomstring := alphanum
-	if option == "all" {
-		randomstring = randomstring + specialchars
-	}
-
-	randomstringLength := len(randomstring)
-	var result string
-	for i := 0; i < length; i++ {
-		rand.Seed(time.Now().UnixNano())
-		randomPos := rand.Intn(randomstringLength)
-		result = result + string(randomstring[randomPos])
-	}
-
-	return result
-}
 
 func main() {
 	args := os.Args[1:]
@@ -52,5 +32,5 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(generateRandomPassword(passwordLength, option))
+	fmt.Println(libs.GenerateRandomPassword(passwordLength, option))
 }
